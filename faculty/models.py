@@ -1,20 +1,8 @@
 from django.db import models
 import random
-
+from.slugify import fac_slugify
 
 # Create your models here.
-# tis a slug
-def fac_slugify(text):
-    idn = random.randint(1, 5000)
-    text = text.lower()
-    unsafe = [letter for letter in text if letter == " "]
-    if unsafe:
-        for letter in unsafe:
-            text = text.replace(letter, '-')
-    text = u'_'.join(text.split())
-    text = f'{text}-{idn}'
-    return text
-
 
 class Faculty(models.Model):
     faculty_name =  models.CharField(max_length=200)
@@ -29,7 +17,7 @@ class Faculty(models.Model):
         return self.faculty_name
 
     def save(self, *args, **kwargs):
-        self.slug = my_slugify(self.faculty_name)
+        self.slug = fac_slugify(self.faculty_name)
         super(Faculty, self).save(*args, **kwargs)
 
 
