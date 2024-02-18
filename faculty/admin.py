@@ -17,8 +17,8 @@ class FacultyAdmin(admin.ModelAdmin):
 
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
-    search_fields = ['faculty_name', 'course_name']
-    list_display=['course_name', 'faculty_name']
+    search_fields = ['faculty', 'course_name']
+    list_display=['course_name', 'faculty']
     list_per_page = 20
     prepopulated_fields = {'slug': ('course_name',)}
 
