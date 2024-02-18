@@ -1,8 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin, Group
 from course.models import Course
-from school.models import School
-from type.models import Type
 from faculty.models import Faculty
 from faculty.slugify import fac_slugify
 
@@ -54,13 +52,19 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         super(CustomUser, self).save(*args, **kwargs)
 
 
+LevelChoices = (
+    ('1', 'level 100'),
+    ('2', 'level 200'),
+    ('3', 'level 300'),
+    ('4', 'level 400'),
+)
 
 
 
 class Student(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     index_number = models.CharField(max_length=15)
-    level = models.CharField(max_length=15, choices=LevelChoices, help_text='your student level', default=1, blank=True,null=True)
+    level = models.CharField(max_length=15, choices=LevelChoices, help_text='your student level',  blank=True,null=True)
     phone = models.CharField(max_length=15,blank=True,null=True)
     course = models.ForeignKey(Course, on_delete=models.RESTRICT, related_name='students_course', blank=True, null=True)
     slug = models.SlugField(max_length=100, unique=True)
@@ -97,7 +101,7 @@ class Lecturer(models.Model):
         super(Lecturer, self).save(*args, **kwargs)
 
 class UserAgentInfo(models.Model):
-    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     user_agent = models.CharField(max_length=255)
     user_ip = models.GenericIPAddressField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)

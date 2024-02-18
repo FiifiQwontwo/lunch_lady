@@ -22,3 +22,5 @@ class CourseAdmin(admin.ModelAdmin):
     list_per_page = 20
     prepopulated_fields = {'slug': ('course_name',)}
 
+
+
