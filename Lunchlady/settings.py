@@ -15,19 +15,17 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config('SECRET_KEY')
-#'django-insecure-%3tpre2^9ap_np2n6vk-i0^hv1q&qe1g=165j_9cd^2r-!vixh'
+# 'django-insecure-%3tpre2^9ap_np2n6vk-i0^hv1q&qe1g=165j_9cd^2r-!vixh'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', cast=bool)
 
 ALLOWED_HOSTS = ['*']
-
 
 # Application definition
 
@@ -41,6 +39,7 @@ INSTALLED_APPS = [
     'faculty.apps.FacultyConfig',
     'course.apps.CourseConfig',
     'accounts.apps.AccountsConfig',
+    'django_user_agents',
 ]
 
 MIDDLEWARE = [
@@ -58,7 +57,7 @@ ROOT_URLCONF = 'Lunchlady.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR /'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -111,7 +110,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
@@ -125,7 +123,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
@@ -135,7 +132,6 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
 
 EMAIL_BACKEND = config('EMAIL_BACKEND')
 EMAIL_HOST = config('EMAIL_HOST')
