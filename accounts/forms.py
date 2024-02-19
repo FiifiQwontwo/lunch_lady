@@ -35,4 +35,22 @@ class LecturerRegistrationForm(forms.Form):
     slug = forms.SlugField(max_length=100, unique=True)
 
 
+class StudentProfileForm(forms.ModelForm):
+    first_name = forms.CharField(label='First Name', max_length=50)
+    last_name = forms.CharField(label='Last Name', max_length=50)
+    email = forms.EmailField(label='Email', max_length=100)
+    password = forms.CharField(widget=forms.PasswordInput)
 
+    class Meta:
+        model = Student
+        fields = ('index_number', 'level', 'course', 'phone', 'first_name', 'last_name', 'email', 'password')
+
+class LecturerProfileForm(forms.ModelForm):
+    first_name = forms.CharField(label='First Name', max_length=50)
+    last_name = forms.CharField(label='Last Name', max_length=50)
+    email = forms.EmailField(label='Email', max_length=100)
+    password = forms.CharField(widget=forms.PasswordInput)
+
+    class Meta:
+        model = Student
+        fields = ('staff_id', 'faculty',  'phone', 'first_name', 'last_name', 'email', 'password')
