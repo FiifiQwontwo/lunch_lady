@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from .models import Student, Lecturer, CustomUser
+from .models import Student, Lecturer, CustomUser, LevelChoices
 from course.models import Course
 from faculty.models import Faculty
 
@@ -21,7 +21,7 @@ class StudentRegistrationForm(forms.Form):
     index_number = forms.CharField(label='Index Number', max_length=15)
     phone = forms.CharField(label='Phone Number', max_length=15)
     level = forms.ChoiceField(label='Level', choices=LevelChoices)
-    slug = forms.SlugField(max_length=100, unique=True)
+    slug = forms.SlugField(max_length=100)
 
 
 
@@ -29,10 +29,10 @@ class LecturerRegistrationForm(forms.Form):
     class Meta:
         model = CustomUser
         fields = ('first_name', 'last_name', 'email', 'password1', 'password2')
-    staff_id = forms.CharField(max_length=100, unique=True)
-    phone = forms.CharField(max_length=11, unique=True)
+    staff_id = forms.CharField(max_length=100)
+    phone = forms.CharField(max_length=11)
     faculty = forms.ModelChoiceField(label='faculty', queryset=Faculty.objects.all())
-    slug = forms.SlugField(max_length=100, unique=True)
+    slug = forms.SlugField(max_length=100)
 
 
 class StudentProfileForm(forms.ModelForm):
@@ -52,5 +52,5 @@ class LecturerProfileForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
 
     class Meta:
-        model = Student
+        model = Lecturer
         fields = ('staff_id', 'faculty',  'phone', 'first_name', 'last_name', 'email', 'password')
