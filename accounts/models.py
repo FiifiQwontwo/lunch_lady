@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, Permis
 from course.models import Course
 from faculty.models import Faculty
 from faculty.slugify import fac_slugify
-
+from django.core.validators import RegexValidator
 
 # Create your models here.
 
@@ -63,7 +63,13 @@ LevelChoices = (
 
 class Student(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
-    index_number = models.CharField(max_length=15)
+    index_number = models.CharField(max_length=15,validators=[
+        RegexValidator(regex=r"^\w{2}\d{8}$", message='Enter a valid pattern like CS20200015',
+                       ),
+    ],
+                                          help_text='Format: CS20200015'
+
+                                          )
     level = models.CharField(max_length=15, choices=LevelChoices, help_text='your student level',  blank=True,null=True)
     phone = models.CharField(max_length=15,blank=True,null=True)
     course = models.ForeignKey(Course, on_delete=models.RESTRICT, related_name='students_course', blank=True, null=True)
