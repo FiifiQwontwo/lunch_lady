@@ -1,0 +1,23 @@
+{% load static %}
+<head>
+    <title>{% block title %}{{section.title}}{% endblock %} </title>
+    <meta charset="utf-8"/>
+    <link rel="canonical" href="../../../../demo1/index.html"/>
+    <link rel="shortcut icon" href="{% static 'assets/media/logos/favicon.ico'%}"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700"/>
+    <link href="{% static 'assets/plugins/global/plugins.bundle.css' %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static 'assets/css/style.bundle.css'%}" rel="stylesheet" type="text/css"/>
+    <script>(function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
+        var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
+        j.async = true;
+        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-5FS8GGP');</script>
+</head>
+
+<script src="{% static 'assets/plugins/global/plugins.bundle.js'%}"></script>
+<script src="{%static 'assets/js/scripts.bundle.js'%}"></script>
+<script src="{%static 'assets/js/custom/authentication/sign-up/general.js'%}"></script>
+
