@@ -8,8 +8,6 @@ from faculty.models import Faculty
 class UserLoginForm(forms.Form):
     username = forms.CharField(label='Email', max_length=100)
     password = forms.CharField(widget=forms.PasswordInput)
-    first_name = forms.CharField(label='First Name', max_length=50)
-    last_name = forms.CharField(label='Last Name', max_length=50)
 
 class StudentRegistrationForm(forms.Form):
 

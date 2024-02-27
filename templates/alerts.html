@@ -1,0 +1,20 @@
+{% if messages %}
+
+    <ul class="messages">
+        {% for message in messages %}
+            <div class="container">
+                <div {% if message.tags %} class="alert alert-{{ message.tags }} alert-dismissible"{% endif %} role="alert">
+                    {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %} Important: {% endif %}
+                    {{ message }}
+                </div>
+            </div>
+            <script>
+
+                setTimeout(function() {
+                    document.querySelector('.alert').style.display = 'none';
+                }, 10000);
+            </script>
+        {% endfor %}
+    </ul>
+{% endif %}
+
